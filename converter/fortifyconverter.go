@@ -2,6 +2,7 @@ package converter
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/bigbird023/fortify-json-parser-to-excel/data"
 	"github.com/bigbird023/fortify-json-parser-to-excel/parser"
@@ -84,18 +85,18 @@ func (c *FortifyConverter) issueToExcel(issue *data.FortifyIssue, sheet xlsx.She
 	}
 
 	col := -1
-	c.setNextCell(&col, row, issue.ProjectVersionID)
-	c.setNextCell(&col, row, issue.LastScanID)
-	c.setNextCell(&col, row, issue.ID)
+	c.setNextCell(&col, row, strconv.Itoa(issue.ProjectVersionID))
+	c.setNextCell(&col, row, strconv.Itoa(issue.LastScanID))
+	c.setNextCell(&col, row, strconv.Itoa(issue.ID))
 	c.setNextCell(&col, row, issue.ProjectVersionName)
 	c.setNextCell(&col, row, issue.ProjectName)
-	c.setNextCell(&col, row, issue.Revision)
-	c.setNextCell(&col, row, issue.FolderID)
+	c.setNextCell(&col, row, strconv.Itoa(issue.Revision))
+	c.setNextCell(&col, row, strconv.Itoa(issue.FolderID))
 	c.setNextCell(&col, row, issue.FolderGUID)
 	c.setNextCell(&col, row, issue.IssueInstanceID)
 	c.setNextCell(&col, row, issue.IssueName)
 	c.setNextCell(&col, row, issue.PrimaryLocation)
-	c.setNextCell(&col, row, issue.LineNumber)
+	c.setNextCell(&col, row, strconv.Itoa(issue.LineNumber))
 	c.setNextCell(&col, row, issue.FullFileName)
 	c.setNextCell(&col, row, issue.Analyzer)
 	c.setNextCell(&col, row, issue.Kingdom)
@@ -104,8 +105,8 @@ func (c *FortifyConverter) issueToExcel(issue *data.FortifyIssue, sheet xlsx.She
 	c.setNextCell(&col, row, issue.BugURL)
 	c.setNextCell(&col, row, issue.ExternalBugID)
 	c.setNextCell(&col, row, issue.PrimaryTag)
-	c.setNextCell(&col, row, issue.HasAttachments)
-	c.setNextCell(&col, row, issue.HasCorrelatedIssues)
+	c.setNextCell(&col, row, strconv.FormatBool(issue.HasAttachments))
+	c.setNextCell(&col, row, strconv.FormatBool(issue.HasCorrelatedIssues))
 	c.setNextCell(&col, row, issue.ScanStatus)
 	c.setNextCell(&col, row, issue.FoundDate)
 	c.setNextCell(&col, row, issue.RemovedDate)
@@ -113,17 +114,17 @@ func (c *FortifyConverter) issueToExcel(issue *data.FortifyIssue, sheet xlsx.She
 	c.setNextCell(&col, row, issue.DisplayEngineType)
 	c.setNextCell(&col, row, issue.EngineCategory)
 	c.setNextCell(&col, row, issue.PrimaryRuleGUID)
-	c.setNextCell(&col, row, issue.Impact)
-	c.setNextCell(&col, row, issue.Likelihood)
-	c.setNextCell(&col, row, issue.Severity)
-	c.setNextCell(&col, row, issue.Confidence)
-	c.setNextCell(&col, row, issue.Audited)
+	c.setNextCell(&col, row, strconv.Itoa(issue.Impact))
+	c.setNextCell(&col, row, strconv.Itoa(issue.Likelihood))
+	c.setNextCell(&col, row, strconv.Itoa(issue.Severity))
+	c.setNextCell(&col, row, strconv.Itoa(issue.Confidence))
+	c.setNextCell(&col, row, strconv.FormatBool(issue.Audited))
 	c.setNextCell(&col, row, issue.IssueStatus)
-	c.setNextCell(&col, row, issue.PrimaryTagValueAutoApplied)
-	c.setNextCell(&col, row, issue.HasComments)
-	c.setNextCell(&col, row, issue.Removed)
-	c.setNextCell(&col, row, issue.Suppressed)
-	c.setNextCell(&col, row, issue.Hidden)
+	c.setNextCell(&col, row, strconv.FormatBool(issue.PrimaryTagValueAutoApplied))
+	c.setNextCell(&col, row, strconv.FormatBool(issue.HasComments))
+	c.setNextCell(&col, row, strconv.FormatBool(issue.Removed))
+	c.setNextCell(&col, row, strconv.FormatBool(issue.Suppressed))
+	c.setNextCell(&col, row, strconv.FormatBool(issue.Hidden))
 	c.setNextCell(&col, row, issue.Href)
 
 	return nil

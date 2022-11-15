@@ -147,6 +147,22 @@ func TestWriteToExcelError(t *testing.T) {
 
 }
 
+func TestConvert(t *testing.T) {
+
+	expectedInput := "../local/examples/test.json"
+	expectedOutput := "../local/output/test.xlsx"
+	fxp := parser.NewFortifyJSONParser()
+
+	c := NewConverter(expectedInput, expectedOutput, fxp)
+
+	err := c.Convert()
+	if err != nil {
+		t.Log(err)
+		t.Fail()
+	}
+
+}
+
 func TestConvertInputError(t *testing.T) {
 
 	expectedInput := "./local/test/testmissing.json"
@@ -225,18 +241,18 @@ func TestConvertIssueToExcelError(t *testing.T) {
 
 func newTestFortifyIssue() *data.FortifyIssue {
 	return &data.FortifyIssue{
-		ProjectVersionID:           "ProjectVersionID",
-		LastScanID:                 "LastScanID",
-		ID:                         "ID",
+		ProjectVersionID:           1,
+		LastScanID:                 2,
+		ID:                         3,
 		ProjectVersionName:         "ProjectVersionName",
 		ProjectName:                "ProjectName",
-		Revision:                   "Revision",
-		FolderID:                   "FolderID",
+		Revision:                   4,
+		FolderID:                   5,
 		FolderGUID:                 "FolderGUID",
 		IssueInstanceID:            "IssueInstanceID",
 		IssueName:                  "IssueName",
 		PrimaryLocation:            "PrimaryLocation",
-		LineNumber:                 "LineNumber",
+		LineNumber:                 6,
 		FullFileName:               "FullFileName",
 		Analyzer:                   "Analyzer",
 		Kingdom:                    "Kingdom",
@@ -245,8 +261,8 @@ func newTestFortifyIssue() *data.FortifyIssue {
 		BugURL:                     "BugURL",
 		ExternalBugID:              "ExternalBugID",
 		PrimaryTag:                 "PrimaryTag",
-		HasAttachments:             "HasAttachments",
-		HasCorrelatedIssues:        "HasCorrelatedIssues",
+		HasAttachments:             true,
+		HasCorrelatedIssues:        true,
 		ScanStatus:                 "ScanStatus",
 		FoundDate:                  "FoundDate",
 		RemovedDate:                "RemovedDate",
@@ -254,17 +270,17 @@ func newTestFortifyIssue() *data.FortifyIssue {
 		DisplayEngineType:          "DisplayEngineType",
 		EngineCategory:             "EngineCategory",
 		PrimaryRuleGUID:            "PrimaryRuleGUID",
-		Impact:                     "Impact",
-		Likelihood:                 "Likelihood",
-		Severity:                   "Severity",
-		Confidence:                 "Confidence",
-		Audited:                    "Audited",
+		Impact:                     7,
+		Likelihood:                 8,
+		Severity:                   9,
+		Confidence:                 10,
+		Audited:                    true,
 		IssueStatus:                "IssueStatus",
-		PrimaryTagValueAutoApplied: "PrimaryTagValueAutoApplied",
-		HasComments:                "HasComments",
-		Removed:                    "Removed",
-		Suppressed:                 "Suppressed",
-		Hidden:                     "Hidden",
+		PrimaryTagValueAutoApplied: true,
+		HasComments:                true,
+		Removed:                    true,
+		Suppressed:                 true,
+		Hidden:                     true,
 		Href:                       "Href",
 	}
 }
