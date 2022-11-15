@@ -1,7 +1,3 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
-*/
 package parser
 
 import (
@@ -13,21 +9,26 @@ import (
 )
 
 type (
-	FortifyJsonParserInterface interface {
-		JsonParse(inputFile string) (*FortifyJson, error)
+	//FortifyJSONParserInterface interface for json parser
+	FortifyJSONParserInterface interface {
+		JSONParse(inputFile string) (*FortifyJSON, error)
 	}
 
-	FortifyJsonParser struct {
+	//FortifyJSONParser struct to create an object
+	FortifyJSONParser struct {
 	}
 
-	FortifyJson []data.FortifyIssue
+	//FortifyJSON array of FortifyIssues
+	FortifyJSON []data.FortifyIssue
 )
 
-func NewFortifyJsonParser() FortifyJsonParserInterface {
-	return &FortifyJsonParser{}
+//NewFortifyJSONParser create a New FortifyJSONParser
+func NewFortifyJSONParser() FortifyJSONParserInterface {
+	return &FortifyJSONParser{}
 }
 
-func (f *FortifyJsonParser) JsonParse(inputFile string) (*FortifyJson, error) {
+//JSONParse parsing json to struct
+func (f *FortifyJSONParser) JSONParse(inputFile string) (*FortifyJSON, error) {
 
 	// Open file
 	file, err := os.Open(inputFile)
@@ -42,11 +43,11 @@ func (f *FortifyJsonParser) JsonParse(inputFile string) (*FortifyJson, error) {
 	byteValue, _ := ioutil.ReadAll(file)
 
 	// we initialize our Users array
-	var fortifyJson FortifyJson
+	var fortifyJSON FortifyJSON
 	// we unmarshal our byteArray which contains our
 	// jsonFiles content into 'users' which we defined above
-	json.Unmarshal(byteValue, &fortifyJson)
+	json.Unmarshal(byteValue, &fortifyJSON)
 
-	return &fortifyJson, nil
+	return &fortifyJSON, nil
 
 }

@@ -1,6 +1,7 @@
 package data
 
 type (
+	//FortifyIssue is the object that holds the details of a fortify issue
 	FortifyIssue struct {
 		ProjectVersionID           string `json:"projectVersionId"`
 		LastScanID                 string `json:"lastScanId"`

@@ -7,33 +7,36 @@ import (
 	"github.com/bigbird023/fortify-json-parser-to-excel/parser"
 )
 
-type MockFortifyJsonParser struct {
+//FortifyJSONParser is the main mocked fortify json parser
+type FortifyJSONParser struct {
 	EmptyReportDefinition bool
 	ForceError            bool
 }
 
-func NewMockFortifyJsonParser() *MockFortifyJsonParser {
-	return &MockFortifyJsonParser{
+//NewFortifyJSONParser creates a new MockFortifyJsonParser
+func NewFortifyJSONParser() *FortifyJSONParser {
+	return &FortifyJSONParser{
 		EmptyReportDefinition: false,
 		ForceError:            false,
 	}
 }
 
-func (m *MockFortifyJsonParser) JsonParse(inputFile string) (*parser.FortifyJson, error) {
+//JSONParse will parse json into a golang struct
+func (m *FortifyJSONParser) JSONParse(inputFile string) (*parser.FortifyJSON, error) {
 	if m.ForceError {
 		return nil, fmt.Errorf("forced error")
 	}
-	var rd *parser.FortifyJson
+	var rd *parser.FortifyJSON
 	if m.EmptyReportDefinition {
-		rd = &parser.FortifyJson{}
+		rd = &parser.FortifyJSON{}
 	} else {
-		rd = NewFortifyJson()
+		rd = newFortifyJSON()
 	}
 
 	return rd, nil
 }
 
-func NewFortifyJson() *parser.FortifyJson {
+func newFortifyJSON() *parser.FortifyJSON {
 
 	jsonDoc := `[
 		{
@@ -170,9 +173,9 @@ func NewFortifyJson() *parser.FortifyJson {
 
 	byteValue := []byte(jsonDoc)
 
-	var fortifyJson *parser.FortifyJson
+	var fortifyJSON *parser.FortifyJSON
 
-	json.Unmarshal(byteValue, &fortifyJson)
+	json.Unmarshal(byteValue, &fortifyJSON)
 
-	return fortifyJson
+	return fortifyJSON
 }

@@ -10,15 +10,17 @@ import (
 )
 
 type (
+	//FortifyConverter is the object for controlling the conversion process from JSON to Excel
 	FortifyConverter struct {
 		headers     []string
 		inputFile   string
 		outputFile  string
-		fortifyjson parser.FortifyJsonParserInterface
+		fortifyjson parser.FortifyJSONParserInterface
 	}
 )
 
-func NewConverter(input string, output string, fxp parser.FortifyJsonParserInterface) *FortifyConverter {
+//NewConverter is the ability to create the default object configuration
+func NewConverter(input string, output string, fxp parser.FortifyJSONParserInterface) *FortifyConverter {
 	conv := &FortifyConverter{
 		headers:     []string{"ProjectVersionID", "LastScanID", "ID", "ProjectVersionName", "ProjectName", "Revision", "FolderID", "FolderGUID", "IssueInstanceID", "IssueName", "PrimaryLocation", "LineNumber", "FullFileName", "Analyzer", "Kingdom", "Friority", "Reviewed", "BugURL", "ExternalBugID", "PrimaryTag", "HasAttachments", "HasCorrelatedIssues", "ScanStatus", "FoundDate", "RemovedDate", "EngineType", "DisplayEngineType", "EngineCategory", "PrimaryRuleGUID", "Impact", "Likelihood", "Severity", "Confidence", "Audited", "IssueStatus", "PrimaryTagValueAutoApplied", "HasComments", "Removed", "Suppressed", "Hidden", "Href"},
 		inputFile:   input,
@@ -28,11 +30,12 @@ func NewConverter(input string, output string, fxp parser.FortifyJsonParserInter
 	return conv
 }
 
+//Convert is the main execution of the conversion
 func (c *FortifyConverter) Convert() error {
 	excelFile := xlsx.New()
 	sheet := excelFile.AddSheet("fortifyIssues")
 
-	fortifyJson, err := c.fortifyjson.JsonParse(c.inputFile)
+	fortifyJSON, err := c.fortifyjson.JSONParse(c.inputFile)
 	if err != nil {
 		return err
 	}
@@ -42,9 +45,9 @@ func (c *FortifyConverter) Convert() error {
 		return err
 	}
 
-	if fortifyJson != nil {
-		for rsloop := 0; rsloop < len(*fortifyJson); rsloop++ {
-			err := c.issueToExcel(&(*fortifyJson)[rsloop], sheet)
+	if fortifyJSON != nil {
+		for rsloop := 0; rsloop < len(*fortifyJSON); rsloop++ {
+			err := c.issueToExcel(&(*fortifyJSON)[rsloop], sheet)
 			if err != nil {
 				err = fmt.Errorf("error converting issue to excel")
 				return err
