@@ -2,6 +2,7 @@ package converter
 
 import (
 	"os"
+	"strconv"
 	"testing"
 
 	"github.com/bigbird023/fortify-json-parser-to-excel/data"
@@ -287,18 +288,18 @@ func newTestFortifyIssue() *data.FortifyIssue {
 
 func assertRowToIssue(t *testing.T, row *xlsx.Row, issue *data.FortifyIssue) {
 	col := -1
-	compareNextColValue(t, &col, row, issue.ProjectVersionID)
-	compareNextColValue(t, &col, row, issue.LastScanID)
-	compareNextColValue(t, &col, row, issue.ID)
+	compareNextColValue(t, &col, row, strconv.Itoa(issue.ProjectVersionID))
+	compareNextColValue(t, &col, row, strconv.Itoa(issue.LastScanID))
+	compareNextColValue(t, &col, row, strconv.Itoa(issue.ID))
 	compareNextColValue(t, &col, row, issue.ProjectVersionName)
 	compareNextColValue(t, &col, row, issue.ProjectName)
-	compareNextColValue(t, &col, row, issue.Revision)
-	compareNextColValue(t, &col, row, issue.FolderID)
+	compareNextColValue(t, &col, row, strconv.Itoa(issue.Revision))
+	compareNextColValue(t, &col, row, strconv.Itoa(issue.FolderID))
 	compareNextColValue(t, &col, row, issue.FolderGUID)
 	compareNextColValue(t, &col, row, issue.IssueInstanceID)
 	compareNextColValue(t, &col, row, issue.IssueName)
 	compareNextColValue(t, &col, row, issue.PrimaryLocation)
-	compareNextColValue(t, &col, row, issue.LineNumber)
+	compareNextColValue(t, &col, row, strconv.Itoa(issue.LineNumber))
 	compareNextColValue(t, &col, row, issue.FullFileName)
 	compareNextColValue(t, &col, row, issue.Analyzer)
 	compareNextColValue(t, &col, row, issue.Kingdom)
@@ -307,8 +308,8 @@ func assertRowToIssue(t *testing.T, row *xlsx.Row, issue *data.FortifyIssue) {
 	compareNextColValue(t, &col, row, issue.BugURL)
 	compareNextColValue(t, &col, row, issue.ExternalBugID)
 	compareNextColValue(t, &col, row, issue.PrimaryTag)
-	compareNextColValue(t, &col, row, issue.HasAttachments)
-	compareNextColValue(t, &col, row, issue.HasCorrelatedIssues)
+	compareNextColValue(t, &col, row, strconv.FormatBool(issue.HasAttachments))
+	compareNextColValue(t, &col, row, strconv.FormatBool(issue.HasCorrelatedIssues))
 	compareNextColValue(t, &col, row, issue.ScanStatus)
 	compareNextColValue(t, &col, row, issue.FoundDate)
 	compareNextColValue(t, &col, row, issue.RemovedDate)
@@ -316,16 +317,16 @@ func assertRowToIssue(t *testing.T, row *xlsx.Row, issue *data.FortifyIssue) {
 	compareNextColValue(t, &col, row, issue.DisplayEngineType)
 	compareNextColValue(t, &col, row, issue.EngineCategory)
 	compareNextColValue(t, &col, row, issue.PrimaryRuleGUID)
-	compareNextColValue(t, &col, row, issue.Impact)
-	compareNextColValue(t, &col, row, issue.Likelihood)
-	compareNextColValue(t, &col, row, issue.Severity)
-	compareNextColValue(t, &col, row, issue.Confidence)
-	compareNextColValue(t, &col, row, issue.Audited)
+	compareNextColValue(t, &col, row, strconv.Itoa(issue.Impact))
+	compareNextColValue(t, &col, row, strconv.Itoa(issue.Likelihood))
+	compareNextColValue(t, &col, row, strconv.Itoa(issue.Severity))
+	compareNextColValue(t, &col, row, strconv.Itoa(issue.Confidence))
+	compareNextColValue(t, &col, row, strconv.FormatBool(issue.Audited))
 	compareNextColValue(t, &col, row, issue.IssueStatus)
-	compareNextColValue(t, &col, row, issue.PrimaryTagValueAutoApplied)
-	compareNextColValue(t, &col, row, issue.HasComments)
-	compareNextColValue(t, &col, row, issue.Removed)
-	compareNextColValue(t, &col, row, issue.Suppressed)
-	compareNextColValue(t, &col, row, issue.Hidden)
+	compareNextColValue(t, &col, row, strconv.FormatBool(issue.PrimaryTagValueAutoApplied))
+	compareNextColValue(t, &col, row, strconv.FormatBool(issue.HasComments))
+	compareNextColValue(t, &col, row, strconv.FormatBool(issue.Removed))
+	compareNextColValue(t, &col, row, strconv.FormatBool(issue.Suppressed))
+	compareNextColValue(t, &col, row, strconv.FormatBool(issue.Hidden))
 	compareNextColValue(t, &col, row, issue.Href)
 }
