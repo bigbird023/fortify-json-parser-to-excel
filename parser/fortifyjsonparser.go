@@ -2,7 +2,7 @@ package parser
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"os"
 
 	"github.com/bigbird023/fortify-json-parser-to-excel/data"
@@ -40,7 +40,7 @@ func (f *FortifyJSONParser) JSONParse(inputFile string) (*FortifyJSON, error) {
 	defer file.Close()
 
 	// read our opened jsonFile as a byte array.
-	byteValue, _ := ioutil.ReadAll(file)
+	byteValue, _ := io.ReadAll(file)
 
 	// we initialize our Users array
 	var fortifyJSON FortifyJSON
