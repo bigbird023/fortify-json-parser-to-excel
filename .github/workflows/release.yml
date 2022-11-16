@@ -4,11 +4,8 @@ on:
   release:
     types: [created]
 
-
-env:
-  BINARY_NAME: "fortifyjsonparsertoexcel"
-
 jobs:
   releases:
     uses: bigbird023/github-actions/.github/workflows/go-release-publishToGithub-workflow.yaml@main
-
+    with:
+      BINARY_NAME: "fortifyjsonparsertoexcel"
